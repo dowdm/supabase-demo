@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
+import Avatar from './Avatar'
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true)
@@ -68,7 +69,18 @@ const Account = ({ session }) => {
   }
 
   return (
-    <div aria-live="polite">
+    <div aria-live="polite"><div className="form-widget">
+    {/* Add to the body */}
+    <Avatar
+      url={avatar_url}
+      size={150}
+      onUpload={(url) => {
+        setAvatarUrl(url)
+        updateProfile({ username, website, avatar_url: url })
+      }}
+    />
+    {/* ... */}
+  </div>
       {loading ? (
         'Saving ...'
       ) : (
